@@ -1,18 +1,24 @@
 from flask import Flask, render_template, request, jsonify
 import joblib
+import os
 import numpy as np
 from sqlalchemy import create_engine, Column, Integer, String, Float, Text, DateTime, func
 from sqlalchemy.orm import declarative_base, sessionmaker
 from datetime import datetime, timedelta
 
+#port=int(os.environ.get("PORT",5000))
+#app.run(host="0.0.0.0", port=port)
 app = Flask(__name__)
 
 # -------------------
 # PostgreSQL Database setup
 # -------------------
-DATABASE_URL = "postgresql+psycopg2://postgres:1234@localhost:5432/mental_health_ai"
+#DATABASE_URL = "postgresql+psycopg2://postgres:1234@localhost:5432/mental_health_ai"
 
-engine = create_engine(DATABASE_URL, echo=False)
+#engine = create_engine(DATABASE_URL, echo=False)
+
+DATABASE_URL = "sqlite:///test.db"
+engine=create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
@@ -430,3 +436,7 @@ def admin_api_stats():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    import os
+
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
