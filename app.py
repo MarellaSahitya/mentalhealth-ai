@@ -73,7 +73,7 @@ def predict():
         # TEMP dummy output
         prediction = "At Risk"
 
-        return render_template("result.html", prediction=prediction)
+        return render_template("result.html", sentiment=prediction)
 
     except Exception as e:
         return str(e)
