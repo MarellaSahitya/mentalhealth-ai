@@ -66,6 +66,20 @@ def home():
 
 @app.route("/predict", methods=["POST"])
 def predict():
+    try:
+        # get form data (optional)
+        user_input = request.form.to_dict()
+
+        # TEMP dummy output
+        prediction = "At Risk"
+
+        return render_template("result.html", prediction=prediction)
+
+    except Exception as e:
+        return str(e)
+
+
+    
     data = request.form
     import joblib
     model = joblib.load("models/behavioral_model.pkl")
