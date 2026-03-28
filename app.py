@@ -67,17 +67,27 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
-        # get form data (optional)
+        # get input (optional)
         user_input = request.form.to_dict()
 
-        # TEMP dummy output
-        prediction = "At Risk"
+        # TEMP values (safe for deployment)
+        sentiment = "Positive"
+        crisis_level = "Low"
+        recommendation = "Stay positive and maintain healthy habits"
 
-        return render_template("result.html", sentiment=prediction)
+        return render_template(
+            "result.html",
+            sentiment=sentiment,
+            crisis_level=crisis_level,
+            recommendation=recommendation
+        )
 
     except Exception as e:
         return str(e)
 
+      
+
+ 
 
     
     data = request.form
