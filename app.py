@@ -50,7 +50,7 @@ Base.metadata.create_all(bind=engine)
 # -------------------
 # Load models
 # -------------------
-behavioral_model = joblib.load("models/behavioral_model.pkl")
+#behavioral_model = joblib.load("models/behavioral_model.pkl")
 scaler = joblib.load("models/scaler.pkl")
 sentiment_model = joblib.load("models/sentiment_model.pkl")
 vectorizer = joblib.load("models/sentiment_vectorizer.pkl")
@@ -67,6 +67,8 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.form
+    import joblib
+    model = joblib.load("models/behavioral_model.pkl")
 
     # Collect and clean inputs
     gender = int(data["gender"])
